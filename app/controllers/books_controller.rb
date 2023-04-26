@@ -9,7 +9,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book_new = Book.new
   end
 
   def create
@@ -44,11 +43,11 @@ class BooksController < ApplicationController
   def book_params
     params.require(:book).permit(:title, :body)
   end
-  
+
   def set_book
     @book = Book.find(params[:id])
   end
-  
+
   def redirect_index_unless_mine
     redirect_to books_path unless @book.user == current_user
   end
