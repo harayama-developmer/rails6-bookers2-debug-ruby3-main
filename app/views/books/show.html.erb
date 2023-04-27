@@ -17,16 +17,27 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
-          <td><%= render "favorites/favorite_button", book: @book %></td>
-          <td>コメント数: <%= @book.book_comments.count %></td>
+          <td id="<%= dom_id(@book, :favorite) %>"><%= render "favorites/favorite_button", book: @book %></td>
+          <td id="<%= dom_id(@book, :comments_count) %>">コメント数: <%= @book.book_comments.count %></td>
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           <% end %>
         </tr>
       </table>
-      <!-- コメント -->
-      <%= render "comments", book: @book %>
+      <!-- コメント一覧 -->
+      <div id="<%= dom_id(@book, :comments_index) %>">
+        <%= render "book_comments/index", book: @book %>
+      </div>
+      <!-- コメント投稿 -->
+      <%= form_with model: [@book, BookComment.new], local: false do |f| %>
+        <div class="form-group">
+          <%= f.text_area :comment, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "送信" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

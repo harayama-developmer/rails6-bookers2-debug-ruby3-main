@@ -5,21 +5,14 @@ class BookCommentsController < ApplicationController
   def create
     @book_comment = @book.book_comments.new(book_comment_params)
     @book_comment.user_id = current_user.id
-    if @book_comment.save
-      redirect_to book_path(@book)
-    else
-      # バリデーションエラー時の要件が不明だったため、とりあえずnoticeでメッセージを出力するようにしています。
-      redirect_to book_path(@book), notice: @book_comment.errors.full_messages.to_sentence
+    unless @book_comment.save
+      render "errors"
     end
   end
 
   def destroy
-    book_comment = @book.book_comments.find(params[:id])
-    # 自分のコメントしか削除できない
-    if book_comment.user == current_user
-      book_comment.destroy
-    end
-    redirect_to request.referer
+    book_comment = @book.book_comments.where(user: current_user).find(params[:id])
+    book_comment.destroy
   end
 
   private
