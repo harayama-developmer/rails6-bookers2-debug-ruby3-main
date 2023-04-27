@@ -4,7 +4,8 @@ class BooksController < ApplicationController
   before_action :redirect_index_unless_mine, only: %i[edit update destroy]
 
   def index
-    @books = Book.all
+    # 過去一週間でいいねの合計カウントが多い順に投稿を表示
+    @books = Book.left_joins(:week_favorites).group(:id).order("count(book_id) desc")
     @book = Book.new
   end
 
