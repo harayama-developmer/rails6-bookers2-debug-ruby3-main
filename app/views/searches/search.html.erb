@@ -1,0 +1,9 @@
+<div class='container px-5 px-sm-0'>
+  <% if @search_form.model == "user" %>
+    <h2>Users search for "<%= @search_form.keyword %>"</h2>
+    <%= render 'users/index', users: @results %>
+  <% else %>
+    <h2>Books search for "<%= @search_form.keyword %>"</h2>
+    <%= render 'books/index', books: @results %>
+  <% end %>
+</div>

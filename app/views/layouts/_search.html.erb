@@ -1,0 +1,8 @@
+<div class="d-flex justify-content-center my-2">
+  <%= form_with model: @search_form, url: searches_path, scope: :q, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword %>
+    <%= f.select :model, SearchForm::MODELS %>
+    <%= f.select :method, SearchForm::METHODS %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
