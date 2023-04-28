@@ -11,7 +11,10 @@
       <%= render 'books/index', books: @books %>
       <!--記録-->
       <div>
-        <%= render 'report', user: @user %>
+        <%= render 'compare_report', user: @user %>
+      </div>
+      <div>
+        <%= render 'graph_report', user: @user %>
       </div>
     </div>
   </div>
