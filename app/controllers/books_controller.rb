@@ -10,6 +10,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book.footprint!(current_user)
   end
 
   def create

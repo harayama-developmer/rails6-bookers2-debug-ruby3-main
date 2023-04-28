@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_28_142933) do
+ActiveRecord::Schema.define(version: 2023_04_28_181934) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 2023_04_28_142933) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "footprints", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "footprintable_type", null: false
+    t.integer "footprintable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["footprintable_type", "footprintable_id"], name: "index_footprints_on_footprintable"
+    t.index ["user_id"], name: "index_footprints_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer "conversation_id", null: false
     t.integer "user_id", null: false
@@ -124,6 +134,7 @@ ActiveRecord::Schema.define(version: 2023_04_28_142933) do
   add_foreign_key "conversation_users", "users"
   add_foreign_key "favorites", "books"
   add_foreign_key "favorites", "users"
+  add_foreign_key "footprints", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
