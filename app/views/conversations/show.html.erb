@@ -1,0 +1,7 @@
+<h1><%= @user.name %> さんとのチャット</h1>
+
+<%= render "messages/index", conversation: @conversation %>
+
+<%= form_with model: [@conversation, Message.new], local: false do |f| %>
+  <%= f.text_field :body %>
+<% end %>

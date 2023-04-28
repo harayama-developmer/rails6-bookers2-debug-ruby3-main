@@ -1,0 +1,9 @@
+<div id="<%= dom_id(conversation, :messages_index) %>" style="width: 400px;">
+  <% conversation.messages.each do |message| %>
+    <% if message.user == current_user %>
+      <p style="text-align: right;"><%= message.body %></p>
+    <% else %>
+      <p style="text-align: left;"><%= message.body %></p>
+    <% end %>
+  <% end %>
+</div>

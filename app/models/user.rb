@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :conversation_users, dependent: :destroy
+  has_many :conversations, through: :conversation_users
+  has_many :messages, dependent: :destroy
 
   has_many :following_relationships,
     class_name: "Relationship",
@@ -51,5 +54,13 @@ class User < ApplicationRecord
 
   def following?(other_user)
     followings.include?(other_user)
+  end
+
+  def followed?(other_user)
+    followers.include?(other_user)
+  end
+
+  def mutual_follow?(other_user)
+    following?(other_user) && followed?(other_user)
   end
 end
