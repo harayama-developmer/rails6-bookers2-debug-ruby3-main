@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :conversation_users, dependent: :destroy
   has_many :conversations, through: :conversation_users
   has_many :messages, dependent: :destroy
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users
 
   has_many :following_relationships,
     class_name: "Relationship",
@@ -30,6 +32,12 @@ class User < ApplicationRecord
   has_many :followers,
     through: :follower_relationships,
     source: :follower
+
+  has_many :owned_groups,
+    class_name: "Group",
+    foreign_key: "owner_id",
+    inverse_of: :owner,
+    dependent: :destroy
 
   has_one_attached :profile_image
 

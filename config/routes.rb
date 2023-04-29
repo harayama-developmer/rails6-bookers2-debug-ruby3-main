@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
+  resources :groups
+
   resources :users, only: [:index,:show,:edit,:update] do
     member do
       get :following

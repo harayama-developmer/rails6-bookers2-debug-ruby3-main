@@ -27,9 +27,10 @@
     <%= button_to "chatを始める", conversations_path, params: { user_id: user.id }, method: :post, class: "btn btn-link ml-2" %>
   <% end %>
 </div>
-<div class="row mt-2">
-  <!--個人的には他人の場合はフォローボタンを表示して、自分の場合は編集ボタンを表示するロジックが好ましいがRspecが失敗してしまうので、いったん他人の場合でも編集ボタンを表示しています。-->
-  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
-    <i class="fas fa-user-cog"></i>
-  <% end %>
-</div>
+<% if user == current_user %>
+  <div class="row mt-2">
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
+  </div>
+<% end %>
