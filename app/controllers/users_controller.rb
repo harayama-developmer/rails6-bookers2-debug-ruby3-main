@@ -34,6 +34,15 @@ class UsersController < ApplicationController
     @users = @user.followers
   end
 
+  def search
+    @user = User.find(params[:id])
+    @books_count = if params[:created_at].present?
+                    @user.books.where(created_at: params[:created_at].to_date.all_day).count
+                   else
+                     "-"
+                   end
+  end
+
   private
 
   def user_params
