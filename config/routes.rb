@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  resources :groups
+  resources :groups do
+    resource :group_user, only: [:create, :destroy]
+  end
 
   resources :users, only: [:index,:show,:edit,:update] do
     member do

@@ -25,4 +25,8 @@ class Group < ApplicationRecord
   def owner?(user)
     owner_id == user.id
   end
+
+  def member?(user)
+    users.include?(user)
+  end
 end

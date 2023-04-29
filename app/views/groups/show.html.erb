@@ -9,14 +9,32 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Group detail</h2>
       <table class='table'>
-        <tr>
-          <td><%= image_tag @group.get_image(50, 50) %></td>
-          <td><%= @group.name %></td>
-          <td><%= @group.introduction %></td>
-          <% if @group.owner?(current_user) %>
-            <td><%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %></td>
-          <% end %>
-        </tr>
+        <thead>
+          <tr>
+            <th></th>
+            <th>グループ名</th>
+            <th>紹介文</th>
+            <th>メンバー</th>
+            <th colspan="1"></th>
+          </tr>
+        </thead>
+       <tbody>
+          <tr>
+            <td><%= image_tag @group.get_image(50, 50) %></td>
+            <td><%= @group.name %></td>
+            <td><%= @group.introduction %></td>
+            <td><%= simple_format @group.users.pluck(:name).join("\n") %></td>
+            <% if @group.owner?(current_user) %>
+              <td><%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %></td>
+            <% else %>
+              <% if @group.member?(current_user) %>
+                <td><%= link_to 'Leave this group', group_group_user_path(@group), method: :delete, class: "btn btn-sm btn-danger" %></td>
+              <% else %>
+                <td><%= link_to 'Join this group', group_group_user_path(@group), method: :post, class: "btn btn-sm btn-success" %></td>
+              <% end %>
+            <% end %>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
