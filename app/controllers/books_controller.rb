@@ -5,7 +5,12 @@ class BooksController < ApplicationController
 
   def index
     # 過去一週間でいいねの合計カウントが多い順に投稿を表示
-    @books = Book.left_joins(:week_favorites).group(:id).order("count(book_id) desc")
+    @books = Book.left_joins(:week_favorites).group(:id).order("count(book_id) desc") if params[:sort].blank?
+    # 新着順
+    @books = Book.order(created_at: :desc) if params[:sort] == "latest"
+    # 評価の高い順
+    @books = Book.order(rate: :desc) if params[:sort] == "rating"
+
     @book = Book.new
   end
 
