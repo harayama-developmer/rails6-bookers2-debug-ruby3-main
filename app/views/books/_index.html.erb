@@ -4,7 +4,7 @@
       <th></th>
       <th>Title</th>
       <th>Opinion</th>
-      <th colspan="4"></th>
+      <th colspan="5"></th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +19,7 @@
         <td id="<%= dom_id(book, :favorite) %>"><%= render "favorites/favorite_button", book: book %></td>
         <td>コメント数: <%= book.book_comments.count %></td>
         <td>閲覧数: <%= book.footprints.count %></td>
+        <td id="<%= dom_id(book, :rating) %>"><%= render "books/rating", book: book %></td>
       </tr>
     <% end %>
   </tbody>

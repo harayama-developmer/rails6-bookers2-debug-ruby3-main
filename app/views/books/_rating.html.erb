@@ -1,0 +1,14 @@
+<!--Raty-->
+<script>
+raty(document.querySelector("#<%= dom_id(book, :rating) %>"), {
+  //星画像の指定などのオプションをここに記述,
+  size: 36,
+  starOff:  '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starHalf: '<%= asset_path('star-half.png') %>',
+  scoreName: 'book[rate]',
+  // half: true, // 動作が安定しないためコメント
+  readOnly: <%= !book.new_record? %>,
+  score: <%= book.rate.presence || "0" %>,
+});
+</script>

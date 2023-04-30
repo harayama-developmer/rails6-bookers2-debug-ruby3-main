@@ -7,6 +7,11 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+  <div class="form-group d-inline-block" id="<%= dom_id(book, :rating) %>">
+    <%= f.label :rate %>
+  </div>
+  <%= render "books/rating", book: f.object %>
+
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
   </div>
