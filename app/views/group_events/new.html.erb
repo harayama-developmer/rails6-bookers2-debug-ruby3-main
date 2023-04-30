@@ -1,0 +1,20 @@
+<div class='container'>
+ <%= render 'layouts/errors', obj: @group_event %>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <h1>Event Mail</h1>
+    <%= form_with model: [@group, @group_event], local:true do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content %>
+        <%= f.text_area :content, class: 'form-control' %>
+      </div>
+      <div class="form-group text-right">
+        <%= f.submit "送信", class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>

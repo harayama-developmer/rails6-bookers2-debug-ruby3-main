@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_29_094424) do
+ActiveRecord::Schema.define(version: 2023_04_29_234019) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +92,17 @@ ActiveRecord::Schema.define(version: 2023_04_29_094424) do
     t.index ["user_id"], name: "index_footprints_on_user_id"
   end
 
+  create_table "group_events", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "user_id", null: false
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_events_on_group_id"
+    t.index ["user_id"], name: "index_group_events_on_user_id"
+  end
+
   create_table "group_users", force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "user_id", null: false
@@ -153,6 +164,8 @@ ActiveRecord::Schema.define(version: 2023_04_29_094424) do
   add_foreign_key "favorites", "books"
   add_foreign_key "favorites", "users"
   add_foreign_key "footprints", "users"
+  add_foreign_key "group_events", "groups"
+  add_foreign_key "group_events", "users"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "groups", "users", column: "owner_id"

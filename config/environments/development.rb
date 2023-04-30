@@ -75,4 +75,5 @@ Rails.application.configure do
 
   # Added
   config.hosts.clear
+  config.action_mailer.delivery_method = :letter_opener_web
 end

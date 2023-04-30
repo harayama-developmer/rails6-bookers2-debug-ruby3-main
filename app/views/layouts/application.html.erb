@@ -18,5 +18,8 @@
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
+    <% if Rails.env.development? %>
+      <%= link_to 'Letter Opener', letter_opener_web_path, target: :_blank %>
+    <% end %>
   </body>
 </html>
